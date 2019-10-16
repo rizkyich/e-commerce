@@ -30,7 +30,8 @@ class UserController {
         if (user && checkPassword(password, user.password)) {
           const payload = {
             _id: user._id,
-            email: user.email
+            email: user.email,
+            role: user.role
           }
           const token = generateToken(payload)
           res.status(200).json({ token, username: user.username })

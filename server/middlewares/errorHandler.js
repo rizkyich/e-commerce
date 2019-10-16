@@ -18,6 +18,7 @@ module.exports = (err, req, res, next) => {
     status = 401
     message = "Fail authentication"
   }
+  console.log(status)
   console.log(message, 'errodhandler')
   res.status(status).json({ message })
 }

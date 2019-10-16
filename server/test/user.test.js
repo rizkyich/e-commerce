@@ -187,9 +187,10 @@ describe('Users', function () {
           }
         })
     })
+     
     it('should get User not found error', function (done) {
       const login = {
-        email: 'tole',
+        email: 'email salah',
         password: 'asssasasa'
       }
       chai.request(app)
@@ -204,8 +205,6 @@ describe('Users', function () {
           }
         })
     })
-
-
   })
 
 })
