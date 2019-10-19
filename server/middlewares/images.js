@@ -35,16 +35,17 @@ const sendUploadToGCS = (req, res, next) => {
     })
   
     stream.on('error', (err) => {
+      console.log('hhhhhh')
       req.file.cloudStorageError = err
       next(err)
     })
     stream.on('finish', () => {
       req.file.cloudStorageObject = gcsname
       file.makePublic().then(() => {
-          
+        console.log('sisni')
         req.file.cloudStoragePublicUrl = getPublicUrl(gcsname)
         req.file.cloudStorageGsUri = getGsUri(gcsname)
-        req.itemId = getPublicUrl(gcsname).replace(/(https:\/\/storage.googleapis.com\/wood_pecker\/)/, '')
+        req.itemId = getPublicUrl(gcsname).replace(/(https:\/\/storage.googleapis.com\/footrauma-images\/)/, '')
         next()
       })
     })
@@ -60,6 +61,7 @@ const multer = Multer({
     fileSize: 5 * 1024 * 1024
   },
   fileFilter: function (req, file, next) {
+    console.log('multer')
     if (!file.mimetype.includes("image")) {
         next({
          status:400,

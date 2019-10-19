@@ -13,7 +13,8 @@ const store = new Vuex.Store({
     admin: null,
     email: null,
     password: null,
-    registerSuccess: false
+    registerSuccess: null,
+    productDetail: null
   },
   mutations: {
     CHANGE_ROLE(state, data) {
@@ -29,6 +30,13 @@ const store = new Vuex.Store({
       state.email = data.email
       state.password = data.password
       state.registerSuccess = data.success
+    },
+    AFTER_LOGIN(state, data) {
+      state.registerSuccess = data
+    },
+    GET_PRODUCT_DETAIL(state, data) {
+      state.productDetail = data
+      console.log(state.productDetail)
     }
   },
   actions: {

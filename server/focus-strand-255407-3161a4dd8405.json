@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "focus-strand-255407",
+  "private_key_id": "3161a4dd8405563fe31eb9be11d3433abd882935",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrjeOcJemCvQGk\nLYx0RZO/jdf/clHSRHfqnj1eya66Vd3WuFYjWcqdR3dRMhDp/5ch688FhoAmUj/0\nuDIkWosReZ109cR6ygW5qRzfQHcd8ioo62d4ZuCjiz3pKIUyijtyz2AAZyaXLgrH\n19H9vGt1mAd1Y74MmAYjDY4e8GISakK3eLFJOQBYEnGXMg4aKRSdbozs6OAy3Rwz\naoFmDIXFpcdOFNCsGES/Xv0OHt/2m7+1CYy/nVvIa2uky7DQLz/dT/DWMnI55a57\nuEoScHFqtkMM8WCa/FDqBFd7zcQZR0JaAFnKmEiLbGDYB1Lc18uofi+1tkj3xSp1\nkpnDBDGlAgMBAAECggEAGnLtvI07yyRItH8xQFvZw5aizodZhgl4U3vCCnMdtSy3\n3vrcjOazDjyOcL4/TVRSgLBSYo+yAjZ8FcawNFqhRjhxxi599FBhQZaJFQJjWwKS\n7Wwdr7pst8on6WKN5pTZRYIjUuyUToqSruzfOzdped/OhpKyIk7t40mbt7ln5V6r\nhSk8RWiS6Q1TLcu1lU9WiUthbqkqbTf/exiha1SogATIV3148HFojrIccNnuiefW\n2QL8AdUBcwz2WyCS8WTbDQCDSbs9UGL5EqAzms+mFzzV+7UVaMNKb/pJDtGjqXgP\n6yqe/S1WEWoy6ZFCAkfaZ57pEwsfpzZRzF2MGeoloQKBgQDsOqwu0TaaXxvrQe4j\ntN3QwCEusE8uMkT8xBezCmj5N4wmpFG6RBL93iSUM3RMMPDuFqS9hCODHh9ioP90\nzZrbOCMzM6bCQHsS7+Cs2kWYDsC0TZkoAVJ7993ODBfKb331wWKh5XRpaPm07YX3\nU6QmIh2+LcI7ZM4Yo4tTEHwPDwKBgQC56YYjpK55y43UFnV9UlGnXsYafGHtbpg0\n14Ebr5ogzqAA1WVu1TZNkOT/LTQEkwkNMEkdwToeL+lJ377n19EWj81D9n9Y7XNJ\nUGvTqs8BuR+V0/EFx3Q9c8D2QQX5yYO9ndJdGBviaMZ59VhSuwRM9jq5o9GG7WrH\n+PY8+1e0CwKBgBWFxvhBAXuRHMcTa7H/IZKKXruVPrGTzOtGpm4eja/fGrrOj8+r\nshtFKQoDoh3q+5iFoZ7OsjmY/f0LdBrdPLWqaLKaix/5pfz0tACrplmTRoVm6IRX\nkn9O9vt16Jj+DXjdlLHxaOjNsqqEVYdSLIt44kLYgnDM32YpSGFaCCOLAoGAHMu9\n+jFc0QKlYi9kXVfty9XTK3EOnf8eVjj3B3nIjsJSaC6lemhN8++4eIng38CCi2dq\nO9CdFuXm5YlhgXmdKjh128wHZ5fH3pg1S2DOlX6+FK/ySindqFMQlVP2//ylii4y\n0jaUwxnlfChzWMUc4mrVJ8HnB1YozvaR9Voc+IcCgYEAhNA1XMlr88xBO1288TXn\nvk1lLbfwapSDbwNm+cCKsQlcQD8EIuewTmunbWUSXW9BZq6ibBLw1fSG7Y5yZBhp\ndfTlw/9Ao9u2mi7eylYzGRNsTlOfuZ9PTGTvEfWtAMYEQ0KzqvZiYKuAg0fbxTzy\nD96umGVKyqifLQvTKEhC24c=\n-----END PRIVATE KEY-----\n",
+  "client_email": "footrauma@focus-strand-255407.iam.gserviceaccount.com",
+  "client_id": "107728228846425018513",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/footrauma%40focus-strand-255407.iam.gserviceaccount.com"
+}

@@ -1,12 +1,9 @@
 <template>
-  <div class="login">
-    <div v-if="this.$store.state.registerSuccess">
-      <p>Register successfull! Now you can login by input ur password. Thank you</p>
-    </div>
-    <div>
-      <p :style="{visibility: errorShow}">{{error}}</p>
-    </div>
+  <div class="login">   
     <form class="px-64 pt-32 pb-8">
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" :style="{visibility: errorShow}">
+        <span class="block sm:inline">{{error}}</span>
+      </div>
       <div class="mb-16">
         <label class="block text-gray-700 text-sm font-bold mb-4" for="email">Email address</label>
         <div>
@@ -35,6 +32,9 @@
         >Submit</button>
        <button v-else type="submit"  @click.prevent=""><i class="fas fa-spinner fa-pulse"></i></button>
       </div>
+        <div v-if="this.$store.state.registerSuccess" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+          <p>Register successfull!</p>
+        </div>
     </form>
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
       email: '',
       password: '',
       error: '',
-      errorShow: '',
+      errorShow: 'hidden',
       loading: false
     }
   },
@@ -66,8 +66,8 @@ export default {
         }
       })
       .then(({data}) => {
-        console.log(data)
         localStorage.setItem('token', data.token)
+        this.$store.commit('AFTER_LOGIN', null)
         if(data.role === 'admin') {
           this.$store.commit('CHANGE_ROLE', 'admin')
           this.$router.push('/admin')
@@ -77,12 +77,18 @@ export default {
         }
       })
       .catch(err => {
+        console.log(err)
         if(err.response) {
-          this.error = err.responese.data.message
+          this.error = err.response.data.message
+          console.log(this.error)
+          console.log('xxx')
         } else if(err.request) {
           this.error = "There's no response from server"
         }
         this.errorShow = 'visible'
+      })
+      .finally(_ => {
+        this.loading = false;
       })
     }
   },

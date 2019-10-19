@@ -46,7 +46,7 @@ export default {
     if(localStorage.getItem('token')) {
       this.$store.commit('CHANGE_ROLE', true)
     } else {
-      this.$store.commit('CHANGE_ROLE', false)
+      this.$store.commit('CHANGE_ROLE', null)
     }
   }
 };

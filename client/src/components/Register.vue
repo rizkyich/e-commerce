@@ -1,9 +1,9 @@
 <template>
   <div class="register">
-    <div>
-      <p :style="{visibility: errorShow}">{{error}}</p>
-    </div>
     <form class="px-64 pt-32 pb-8">
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" :style="{visibility: errorShow}">
+        <span class="block sm:inline">{{error}}</span>
+      </div>
       <div class="mb-16">
         <label class="block text-gray-700 text-sm font-bold mb-4" for="email">Username*</label>
         <div>
@@ -93,7 +93,7 @@ export default {
           }
           this.errorShow = "visible";
         })
-        .finally(() => {
+        .finally(_ => {
           this.loading = false;
         });
     }

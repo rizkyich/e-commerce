@@ -36,9 +36,9 @@ class UserController {
           const token = generateToken(payload)
           res.status(200).json({ token, username: user.username, role: user.role })
         } else if (user) {
-          res.status(404).json({ message: 'Invalid Password' })
+          next({status: 404, message: 'Invalid Password' })
         } else {
-          res.status(404).json({ message: 'User does not exist' })
+          next({ status:404, message: 'User does not exist' })
         }
       })
       .catch(next)

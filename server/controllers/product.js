@@ -1,13 +1,19 @@
 const Product = require('../models/product')
+const { Storage } = require('@google-cloud/storage')
+
+const storage = new Storage({
+  projectId: process.env.GOOGLE_CLOUD_PROJECT_ID,
+  keyFilename: process.env.GOOGLE_CLOUD_KEYFILE
+})
 
 class ProductController {
   static getAll(req, res, next) {
+    console.log('masuk')
     Product
       .find()
-      .sort({ updatedAt: -1 })
       .then(items => {
-        if(!items[0]) res.status(204).json({message:'items not available'})
-        res.status(200).json(items)
+        if (!items[0]) res.status(204).json({ message: 'items not available' })
+        else res.status(200).json(items)
       })
       .catch(next)
   }
@@ -19,7 +25,7 @@ class ProductController {
       .find({ itemType })
       .sort({ updatedAt: -1 })
       .then(items => {
-        if(!items[0]) res.status(204).json({message:'items not available'})
+        if (!items[0]) res.status(204).json({ message: 'items not available' })
         res.status(200).json(items)
       })
       .catch(next)
@@ -27,9 +33,14 @@ class ProductController {
 
   static registerProduct(req, res, next) {
     const { itemName, description, price, qty, itemType } = req.body
-
+    console.log(req.body)
+    let image = null
+    if (req.file) {
+      image = req.file.cloudStoragePublicUrl
+    }
+    console.log(image)
     Product
-      .create({ itemName, description, price, qty, itemType })
+      .create({ itemName, description, price, qty, itemType, image })
       .then(item => {
         res.status(201).json(item)
       })
