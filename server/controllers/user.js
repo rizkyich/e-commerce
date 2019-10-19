@@ -5,7 +5,7 @@ const { generateToken } = require('../helpers/jwt.js')
 class UserController {
   static register(req, res, next) {
     const { username, password, email, role } = req.body
-    
+    console.log(req.body)
     let getRole = role ? role : 'user'
     User
       .create({
@@ -34,7 +34,7 @@ class UserController {
             role: user.role
           }
           const token = generateToken(payload)
-          res.status(200).json({ token, username: user.username })
+          res.status(200).json({ token, username: user.username, role: user.role })
         } else if (user) {
           res.status(404).json({ message: 'Invalid Password' })
         } else {
@@ -43,6 +43,88 @@ class UserController {
       })
       .catch(next)
 
+  }
+  static addToCart(req, res, next) {
+    let userData
+
+    User
+      .findOne({
+        _id: req.payload._id
+      })
+      .then(user => {
+        userData = user
+        return Product.findOne({
+          _id: req.params.id
+        })
+      })
+      .then(product => {
+        if (product.qty >= 1) {
+          userData.cart.push(product._id)
+          return User.update({
+            _id: userData._id
+          }, {
+            cart: userData.cart
+          })
+        } else {
+          next({ status: 204, message: 'Item is not available right now! Sorry!' })
+        }
+      })
+      .then(_ => {
+        res.status(200).json({ message: 'Item added to cart' })
+      })
+      .catch(next)
+  }
+
+  static getCart(req, res, next) {
+    User
+      .findOne({ _id: req.payload._id })
+      .populate('cart')
+      .then(({ cart }) => {
+        res.status(200).json({ cart })
+      })
+      .catch(next)
+  }
+
+  static removeCart(req, res, next) {
+    let userData
+
+    User
+      .findOne({
+        _id: req.payload._id
+      })
+      .then(user => {
+        const promises = []
+        user.cart.forEach(el => {
+          promises.push(Product.findOne({
+            _id: el
+          }))
+        })
+        userData = user
+        return Promise.all(promises)
+      })
+      .then(products => {
+        const promises = []
+        products.forEach(product => {
+          product.qty--
+          promises.push(Product.update({
+            _id: product._id
+          }, {
+            qty: product.qty
+          }))
+        })
+        return Promise.all(promises)
+      })
+      .then(_ => {
+        return User.update({
+          _id: userData._id
+        }, {
+          cart: []
+        })
+      })
+      .then(_ => {
+        res.status(200).json({ message: 'Items in cart is deleted' })
+      })
+      .catch(next)
   }
 }
 
