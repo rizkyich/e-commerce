@@ -1,6 +1,7 @@
 <template>
-  <div class="w-full flex flex-col items-center myContainer pt-20 mt-3">
-    <form class="w-full max-w-lg">
+  <div class="w-full flex flex-row myContainer pt-40 mt-3">
+    <div class="w-3/12 ml-10 flex m-l flex-col max-w-lg">
+    <form >
       <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3 mb-6 md:mb-0">
           <label
@@ -86,20 +87,24 @@
         </div>
       </div>
     </form>
-    <form action @submit.prevent="publish" enctype="multipart/form-data">
+    <form action @submit.prevent="publish" enctype="multipart/form-data" class="flex flex-col">
       <input id="gambar" type="file" ref="image" accept="image/*" v-on:change="handleImage" />
-      <button v-if="!id" type="submit">Register this item</button>
-      <button v-else type="submit">Update this item</button>
+      <div class="mt-4 w-full">
+      <button v-if="!id" type="submit" class="bg-black w-full btn-hover text-white font-bold py-2 px-4 focus:outline-none"
+>Register item</button>
+      <button v-else type="submit" class="bg-black w-full btn-hover text-white font-bold py-2 px-4 focus:outline-none">Update item</button>
+      </div>
     </form>
-      <h1 style="text-align: center; margin-top: 8vh; font-size: 1.5rem; padding: 2vh;">All items</h1>
-    <div class="w-full flex flex-row min-h-1/2 p-20">
-      <div class="w-1/6 m-4 min-h-full" v-for="(product, index) in this.$store.state.products" :key="index">
-        
+  </div>
+  <div class="flex flex-col w-4/12" style="height: 70vh;">
+    <h1 style="text-align: center; font-size: 1.5rem; padding: 2vh;">Item List</h1>
+    <div class="w-full flex flex-col flex-wrap h-full" style="overflow: auto;">
+      <div class="w-3/12 h-56"  v-for="(product, index) in this.$store.state.products" :key="index">
         <div
           @click.prevent="itemDetail(product)"
-          class="w-full h-64 flex flex-col shadow">
+          class="ml-20 mt-20 w-full min-h-full flex flex-col shadow mb-2 box">
           <div>
-            <img class="object-contain w-full" :src="product.image" alt />
+            <img class="object-contain w-full h-40" :src="product.image" alt />
           </div>
           <div>
             <p class="text-center">{{product.itemName}}</p>
@@ -107,7 +112,8 @@
         </div>
       </div>
     </div>
-    <div>
+  </div>
+    <div class="detail mx-10 w-5/12">
       <router-view :product="product" @update="update"></router-view>
     </div>
   </div>
@@ -133,7 +139,7 @@ export default {
   methods: {
     update(product) {
       this.id = product._id;
-      this.title = product.itemName;
+      this.name = product.itemName;
       this.description = product.description;
       this.price = product.price;
       this.qty = product.qty;
@@ -219,16 +225,7 @@ export default {
         width: 100%;
     }
 
- .box{
-        height: 20vh;
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 20px;
-        margin-bottom: 2vh;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        box-shadow: 7px 9px 18px -6px rgba(0,0,0,0.75);
+ .box:hover{
+        cursor: pointer;
     }
 </style>

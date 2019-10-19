@@ -23,7 +23,7 @@ class ProductController {
 
     Product
       .find({ itemType })
-      .sort({ updatedAt: -1 })
+      .sort({ createdAt: 'desc' })
       .then(items => {
         if (!items[0]) res.status(204).json({ message: 'items not available' })
         res.status(200).json(items)
@@ -33,12 +33,12 @@ class ProductController {
 
   static registerProduct(req, res, next) {
     const { itemName, description, price, qty, itemType } = req.body
-    console.log(req.body)
+
     let image = null
     if (req.file) {
       image = req.file.cloudStoragePublicUrl
     }
-    console.log(image)
+
     Product
       .create({ itemName, description, price, qty, itemType, image })
       .then(item => {
@@ -51,21 +51,45 @@ class ProductController {
     const { itemName, description, price, qty, itemType } = req.body
     const _id = req.params.id
 
-    Product
-      .findByIdAndUpdate(_id, {
-        itemName, description, price, qty, itemType
+    let image = null
+    if (req.file) {
+      image = req.file.cloudStoragePublicUrl
+    }
+    Product.findById({
+      _id
+    })
+      .then(product => {
+        if (!image) {
+          image = product.image
+        } else {
+          let filename = product.image.replace(/(https:\/\/storage.googleapis.com\/footrauma-images\/)/, '')
+          storage.bucket(process.env.GOOGLE_CLOUD_BUCKET)
+            .file(filename).delete()
+        }
+        return Product.update({
+          _id: req.params.id
+        }, {
+          itemName, description, price, qty, itemType, image
+        })
       })
-      .then(item => {
-        res.status(200).json(item)
+      .then(_ => {
+        res.status(200).json({ message: "Succefully updated" })
       })
+      .catch(next)
   }
 
   static remove(req, res, next) {
     const _id = req.params.id
-
+    console.log('ini')
     Product
       .findByIdAndDelete(_id)
       .then(item => {
+        console.log(item)
+        console.log('itu')
+        let filename = item.image.replace(/(https:\/\/storage.googleapis.com\/footrauma-images\/)/, '')
+        console.log(filename)
+        storage.bucket(process.env.GOOGLE_CLOUD_BUCKET)
+        .file(filename).delete()
         res.status(200).json(item)
       })
       .catch(next)
