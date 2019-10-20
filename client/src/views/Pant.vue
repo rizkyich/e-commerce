@@ -8,12 +8,12 @@
 import ListItems from '@/components/ListItems'
 
 export default {
-  name: 'Sneaker',
+  name: 'Pants',
   components: {
     ListItems
   },
   created() {
-      this.$store.dispatch('fetchProducts', { itemType: 'Sneakers' })
+      this.$store.dispatch('fetchProducts', { itemType: 'Pants' })
   }
 }
 </script>

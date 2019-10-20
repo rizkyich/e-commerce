@@ -4,12 +4,8 @@
       <div class="text-center mb-3">
         <h4 class="text-lg">New Arrivals</h4>
       </div>
-      <div class="flex flex-wrap justify-between flex-row w-full h-auto">
-        <CardItem />
-        <CardItem />
-        <CardItem />
-        <CardItem />
-        <CardItem />
+      <div class="flex flex-wrap justify-space flex-row w-full h-auto">
+        <CardItem v-for="(product, index) in this.$store.state.products" :key="index" :product="product"/>
       </div>
     </div>
   </div>

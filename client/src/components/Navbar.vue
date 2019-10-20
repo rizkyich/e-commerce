@@ -26,7 +26,7 @@
       </div>
       <div>
         <router-link to="/cart">
-          <p>Shopping Cart</p>
+          <p>Cart ({{totalCart}})</p>
         </router-link>
       </div>
     </div>
@@ -37,16 +37,33 @@
 export default {
   methods: {
     logout() {
-      localStorage.removeItem("token");
-      this.$store.commit("CHANGE_ROLE", null);
-      this.$router.push("/");
+      Swal.fire({
+        title: "Are you sure",
+        text: "You want to logout?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Logout!"
+      }).then(result => {
+        if (result.value) {
+          localStorage.removeItem("token");
+          this.$store.commit("CHANGE_ROLE", null);
+          this.$router.push("/");
+        }
+      });
     }
   },
   created() {
-    if(localStorage.getItem('token')) {
-      this.$store.commit('CHANGE_ROLE', true)
+    if (localStorage.getItem("token")) {
+      this.$store.commit("CHANGE_ROLE", true);
     } else {
-      this.$store.commit('CHANGE_ROLE', null)
+      this.$store.commit("CHANGE_ROLE", null);
+    }
+  },
+  computed: {
+    totalCart() {
+      return this.$store.state.totalCart;
     }
   }
 };

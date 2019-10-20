@@ -15,6 +15,10 @@ export default {
   components: {
     Banner,
     ListItems
+  },
+  created() {
+
+    this.$store.dispatch('fetchAllProducts')
   }
 };
 </script>

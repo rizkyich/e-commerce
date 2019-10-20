@@ -10,6 +10,7 @@ const store = new Vuex.Store({
     products: [],
     role: null,
     cart: [],
+    totalCart: 0,
     admin: null,
     email: null,
     password: null,
@@ -34,9 +35,8 @@ const store = new Vuex.Store({
     AFTER_LOGIN(state, data) {
       state.registerSuccess = data
     },
-    GET_PRODUCT_DETAIL(state, data) {
-      state.productDetail = data
-      console.log(state.productDetail)
+    SET_TOTAL_CART(state, data) {
+      state.totalCart += data
     }
   },
   actions: {

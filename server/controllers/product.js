@@ -8,9 +8,9 @@ const storage = new Storage({
 
 class ProductController {
   static getAll(req, res, next) {
-    console.log('masuk')
     Product
       .find()
+      .sort({createdAt: 'desc'})
       .then(items => {
         if (!items[0]) res.status(204).json({ message: 'items not available' })
         else res.status(200).json(items)

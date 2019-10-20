@@ -146,7 +146,6 @@ export default {
       this.type = product.itemType;
     },
     itemDetail(product) {
-      this.$store.commit('GET_PRODUCT_DETAIL', product)
       this.$router.push(`/admin/${product._id}`);
       this.product = product
     },

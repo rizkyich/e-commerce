@@ -27,6 +27,26 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
+      path: '/cart',
+      name: 'Cart',
+      component: () => import(/* webpackChunkName: "Cart" */ './views/Cart.vue')
+    },
+    {
+      path: '/jackets',
+      name: 'Jacket',
+      component: () => import(/* webpackChunkName: "Cart" */ './views/Jacket.vue')
+    },
+    {
+      path: '/sneakers',
+      name: 'Sneakers',
+      component: () => import(/* webpackChunkName: "Cart" */ './views/Sneaker.vue')
+    },
+    {
+      path: '/pants',
+      name: 'Pants',
+      component: () => import(/* webpackChunkName: "Cart" */ './views/Pant.vue')
+    },
+    {
       path: '/admin',
       name: 'Admin',
       component: () => import(/* webpackChunkName: "Admin" */ './views/Admin.vue'),

@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Product = require('../models/product')
 const { checkPassword } = require('../helpers/bcrypt')
 const { generateToken } = require('../helpers/jwt.js')
 
@@ -49,7 +50,7 @@ class UserController {
 
     User
       .findOne({
-        _id: req.payload._id
+        _id: req.loggedUser._id
       })
       .then(user => {
         userData = user
@@ -58,8 +59,10 @@ class UserController {
         })
       })
       .then(product => {
+        console.log(product)
         if (product.qty >= 1) {
           userData.cart.push(product._id)
+          console.log(userData)
           return User.update({
             _id: userData._id
           }, {
@@ -77,22 +80,23 @@ class UserController {
 
   static getCart(req, res, next) {
     User
-      .findOne({ _id: req.payload._id })
+      .findOne({ _id: req.loggedUser._id })
       .populate('cart')
       .then(({ cart }) => {
-        res.status(200).json({ cart })
+        res.status(200).json(cart)
       })
       .catch(next)
   }
 
   static removeCart(req, res, next) {
     let userData
-
+    console.log(req.loggedUser)
     User
       .findOne({
-        _id: req.payload._id
+        _id: req.loggedUser._id
       })
       .then(user => {
+        console.log(user)
         const promises = []
         user.cart.forEach(el => {
           promises.push(Product.findOne({
@@ -103,6 +107,7 @@ class UserController {
         return Promise.all(promises)
       })
       .then(products => {
+        console.log(products)
         const promises = []
         products.forEach(product => {
           product.qty--

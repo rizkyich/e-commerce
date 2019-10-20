@@ -1,7 +1,11 @@
 <template>
   <div class="register">
     <form class="px-64 pt-32 pb-8">
-      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" :style="{visibility: errorShow}">
+      <div
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+        role="alert"
+        :style="{visibility: errorShow}"
+      >
         <span class="block sm:inline">{{error}}</span>
       </div>
       <div class="mb-16">
@@ -39,7 +43,11 @@
           class="bg-black w-full btn-hover text-white font-bold py-2 px-4 focus:outline-none"
           type="button"
         >Register</button>
-        <button v-else type="submit" @click.prevent>
+        <button
+          v-else
+          type="submit"
+          class="bg-black w-full btn-hover text-white font-bold py-2 px-4 focus:outline-none"
+        >
           <i class="fas fa-spinner fa-pulse"></i>
         </button>
       </div>
@@ -63,7 +71,7 @@ export default {
   },
   methods: {
     register() {
-      console.log('register')
+      console.log("register");
       this.loading = true;
       axios({
         method: "post",
@@ -81,9 +89,9 @@ export default {
             success: true
           };
           this.$store.commit("SUCCESS_REGISTER", newData);
-          this.username = ''
-          this.email = ''
-          this.password = ''
+          this.username = "";
+          this.email = "";
+          this.password = "";
         })
         .catch(err => {
           if (err.response) {
