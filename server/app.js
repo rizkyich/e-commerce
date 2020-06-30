@@ -13,7 +13,7 @@ const app = express()
 
 
 // middlewares
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
 app.use(morgan('dev'))
